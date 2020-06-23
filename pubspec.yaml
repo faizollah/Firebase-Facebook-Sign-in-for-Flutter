@@ -27,6 +27,9 @@ dependencies:
   firebase_core: ^0.4.0+9
   cloud_firestore: ^0.12.9+5
   google_sign_in: ^4.0.4
+  fluttertoast: ^4.0.0
+  flutter_webview_plugin: ^0.3.10+1
+  flutter_auth_buttons: ^0.8.0
 
 dev_dependencies:
   flutter_test:

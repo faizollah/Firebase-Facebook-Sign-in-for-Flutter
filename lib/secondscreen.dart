@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SecondScreen extends StatefulWidget {
   @override
@@ -80,7 +81,7 @@ class _SecondScreenState extends State<SecondScreen> {
             RaisedButton.icon(
               color: Colors.deepOrangeAccent,
               onPressed: () {
-                firestore.collection('users').document(username).setData({
+                firestore.collection('users').add({
                   'age': age,
                   'gender': gender,
                 });
@@ -90,6 +91,23 @@ class _SecondScreenState extends State<SecondScreen> {
               ),
               label: Text(
                 'Submit',
+                style: TextStyle(fontSize: 25),
+              ),
+            ),
+            RaisedButton.icon(
+              color: Colors.deepOrangeAccent,
+              onPressed: () async {
+                await firestore.collection('users').getDocuments().then((data) {
+                  data.documents.forEach((element) {
+                    firestore.collection('users').document(element.documentID).delete();
+                  });
+                });
+              },
+              icon: Icon(
+                Icons.arrow_forward,
+              ),
+              label: Text(
+                'READ',
                 style: TextStyle(fontSize: 25),
               ),
             ),

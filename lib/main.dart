@@ -1,7 +1,9 @@
+import 'package:firestore/loginWithFacebook.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'secondscreen.dart';
 import 'sign_in.dart';
+import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
 void main() => runApp(MyApp());
 
@@ -86,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             RaisedButton.icon(
+              ////////////////////////////REGISTER/////////////////////////////
               color: Colors.deepOrangeAccent,
               onPressed: () async {
                 await auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -100,7 +103,22 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 10),
-            signInButton(),
+            signInButton(), /////////////////////////////////////GOOGLE SIGN IN//////////////////
+            SizedBox(height: 10),
+            FacebookSignInButton(
+              ///////////////////////////////////////////FACEBOOK BUTTON//////////////////////////
+              onPressed: () {
+                loginWithFacebook(context).whenComplete(() {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SecondScreen();
+                      },
+                    ),
+                  );
+                });
+              },
+            ),
           ],
         ),
       ),
